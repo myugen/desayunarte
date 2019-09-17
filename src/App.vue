@@ -1,29 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <v-app>
+    <v-app-bar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>DESAYUNARTE</span>
+        <span class="font-weight-light">2.0</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-img
+        :src="require('@/assets/logo.png')"
+        class="my-3"
+        contain
+        position="right"
+        height="50"
+      ></v-img>
+    </v-app-bar>
+
+    <v-content>
+      <HelloWorld />
+      <Selection />
+    </v-content>
+  </v-app>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import Vue from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
+import Selection from "./components/Selection.vue";
 
-@Component({
+export default Vue.extend({
+  name: "App",
   components: {
-    HelloWorld
-  }
-})
-export default class App extends Vue {}
+    HelloWorld,
+    Selection
+  },
+  data: () => ({
+    //
+  })
+});
 </script>
-
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
