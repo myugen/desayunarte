@@ -1,0 +1,26 @@
+{
+    "users": [
+        { "name": "Javi Rodri", "alias": "frodgar", "order": true },
+        { "name": "San", "alias": "smarrui", "order": true },
+        { "name": "Rita", "alias": "rdiaada", "order": true },
+        { "name": "David", "alias": "dvelran", "order": true },
+        { "name": "Zeben", "alias": "zmencor", "order": true },
+        { "name": "Laura", "alias": "lgutmed", "order": true },
+        { "name": "Fernando", "alias": "fgonmor", "default": "last", "order": true },
+        { "name": "Victoria", "alias": "kzunmen", "order": true },
+        { "name": "María", "alias": "msansim", "order": false },
+        { "name": "Miguel", "alias": "mcabsan", "order": true },
+        { "name": "Isaac", "alias": "iaimsal", "order": true },
+        { "name": "Vicente", "alias": "vtetsan", "order": true },
+        { "name": "Rumenaby", "alias": "rgonper", "order": true },
+        { "name": "Nicolas", "alias": "njorcam", "order": true },
+        { "name": "Miguel Jonás", "alias": "mbragar", "order": true },
+        { "name": "Alex Jimmy", "alias": "amonfue", "order": true },
+        { "name": "Alejandro", "alias": "aleofer", "order": true },
+        { "name": "Samuel", "alias": "sbaugar", "order": true },
+        { "name": "Víctor", "alias": "vsuarod", "order": true },
+        { "name": "Alberto", "alias": "areggom", "order": true },
+        { "name": "José Joaquín", "alias": "jescgom", "order": true }
+
+    ]
+}
