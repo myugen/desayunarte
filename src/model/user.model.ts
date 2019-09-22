@@ -1,7 +1,6 @@
 export interface User {
     alias: string;
     name: string;
-    order: boolean;
-    goOut: boolean;
+    include: boolean;
     default?: string;
 }

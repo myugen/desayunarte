@@ -17,6 +17,7 @@
 
     <v-content>
       <Selection />
+      <Result />
     </v-content>
   </v-app>
 </template>
@@ -24,11 +25,13 @@
 <script lang="ts">
 import Vue from "vue";
 import Selection from "./components/Selection.vue";
+import Result from "./components/Result.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
-    Selection
+    Selection,
+    Result
   },
   data: () => ({
     //
