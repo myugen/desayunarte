@@ -58,14 +58,9 @@ export default Vue.extend({
   methods: {
     setResult(result: Map<string, User[]>) {
       this.result = result;
-      console.log(this.result);
     },
-    onCopySuccess: (e: any) => {
-      console.log("Copied!", e.text);
-    },
-    onCopyError: (e: any) => {
-      console.error("An error occurs", e);
-    },
+    onCopySuccess: (e: any) => {},
+    onCopyError: (e: any) => {},
     getTextToCopy() {
       return JSON.stringify(this.result);
     }
