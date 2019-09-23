@@ -14,15 +14,22 @@
           >
             <v-card>
               <v-card-title
-                ><h4>Turno {{ index }}</h4></v-card-title
+                ><h4>
+                  Turno {{ index + 1 }} ({{ getTimeTurn(index) }})
+                </h4></v-card-title
               >
               <v-divider></v-divider>
               <v-list dense>
                 <v-list-item v-for="user in turn" :key="user.alias">
                   <v-list-item-content>{{ user.name }}</v-list-item-content>
-                  <v-list-item-content class="align-end">{{
-                    user.alias
-                  }}</v-list-item-content>
+                  <v-list-item-content class="align-end">
+                    <v-chip>
+                      <v-avatar left>
+                        <v-icon>fas fa-at</v-icon>
+                      </v-avatar>
+                      {{ user.alias }}
+                    </v-chip>
+                  </v-list-item-content>
                 </v-list-item>
               </v-list>
             </v-card>
@@ -58,6 +65,18 @@ export default Vue.extend({
   methods: {
     setResult(result: Map<string, User[]>) {
       this.result = result;
+    },
+    getTimeTurn(turnNumber: number) {
+      switch (turnNumber) {
+        case 0:
+          return "10:15";
+        case 1:
+          return "10:30";
+        case 2:
+          return "10:45";
+        default:
+          return "";
+      }
     },
     onCopySuccess: (e: any) => {},
     onCopyError: (e: any) => {},

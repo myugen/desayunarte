@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-toolbar-title class="headline text-uppercase">
         <span>DESAYUNARTE</span>
-        <span class="font-weight-light">2.0</span>
+        <span class="font-weight-light">{{ version }}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-img
@@ -33,8 +33,11 @@ export default Vue.extend({
     Selection,
     Result
   },
+  mounted() {
+    this.version = process.env.VERSION;
+  },
   data: () => ({
-    //
+    version: 0
   })
 });
 </script>
