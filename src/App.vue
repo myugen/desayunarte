@@ -16,8 +16,14 @@
     </v-app-bar>
 
     <v-content>
-      <Selection />
-      <Result />
+      <v-row>
+        <v-col cols="12" md="6" lg="6" xl="6">
+          <Selection />
+        </v-col>
+        <v-col cols="12" md="6" lg="6" xl="6">
+          <Result />
+        </v-col>
+      </v-row>
     </v-content>
   </v-app>
 </template>

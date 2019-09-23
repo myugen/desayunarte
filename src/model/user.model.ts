@@ -2,5 +2,5 @@ export interface User {
     alias: string;
     name: string;
     include: boolean;
-    default?: number;
+    default?: string;
 }

@@ -8,9 +8,10 @@
             v-for="(turn, index) in Array.from(this.result.values())"
             :key="index"
             cols="12"
-            sm="6"
-            md="4"
-            lg="4"
+            sm="12"
+            md="12"
+            lg="12"
+            xl="4"
           >
             <v-card>
               <v-card-title
@@ -37,13 +38,7 @@
         </v-row>
       </v-card-text>
       <v-card-actions>
-        <v-btn
-          text
-          color="success"
-          v-clipboard:copy="getTextToCopy()"
-          v-clipboard:success="onCopySuccess"
-          v-clipboard:error="onCopyError"
-        >
+        <v-btn text color="success" @click="copy">
           <v-icon small left>far fa-clipboard</v-icon>
           <span>Copiar</span>
         </v-btn>
@@ -53,14 +48,15 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import EventBus from "@/eventBus";
+import eventBus from "@/eventBus";
 import { User } from "@/model";
 export default Vue.extend({
+  name: "Result",
   mounted: function() {
-    EventBus.$on("onDrawEvent", this.setResult);
+    eventBus.$on("onDrawEvent", this.setResult);
   },
   destroyed: function() {
-    EventBus.$off("onDrawEvent");
+    eventBus.$off("onDrawEvent");
   },
   methods: {
     setResult(result: Map<string, User[]>) {
@@ -78,10 +74,34 @@ export default Vue.extend({
           return "";
       }
     },
-    onCopySuccess: (e: any) => {},
+    copy() {
+      this.$copyText(this.getTextToCopy()).then(
+        this.onCopySuccess,
+        this.onCopyError
+      );
+    },
+    onCopySuccess: (e: any) => {
+      console.log("Copied!", e.text);
+    },
     onCopyError: (e: any) => {},
     getTextToCopy() {
-      return JSON.stringify(this.result);
+      const values = Array.from(this.result.values());
+
+      return values
+        .map(
+          (turn, index) =>
+            `Turno ${index + 1}: [${turn
+              .map(user =>
+                index != 0
+                  ? user.name
+                  : user.name
+                      .concat(" ( @")
+                      .concat(user.alias)
+                      .concat(" )")
+              )
+              .join(", ")}]`
+        )
+        .join("\n");
     }
   },
   data: () => ({

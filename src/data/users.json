@@ -6,7 +6,7 @@
         { "name": "David", "alias": "dvelran", "include": true },
         { "name": "Zeben", "alias": "zmencor", "include": true },
         { "name": "Laura", "alias": "lgutmed", "include": true },
-        { "name": "Fernando", "alias": "fgonmor", "default": 2, "include": true },
+        { "name": "Fernando", "alias": "fgonmor", "default": "last", "include": true },
         { "name": "Victoria", "alias": "kzunmen", "include": true },
         { "name": "María", "alias": "msansim", "order": false, "include": true },
         { "name": "Miguel", "alias": "mcabsan", "include": true },
