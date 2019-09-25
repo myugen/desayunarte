@@ -32,7 +32,7 @@
         </v-list>
       </v-card-text>
       <v-card-actions>
-        <GroupModal :users="users" />
+        <GroupModal :users="getIncludedUser()" />
       </v-card-actions>
     </v-card>
   </v-container>
@@ -53,6 +53,11 @@ export default Vue.extend({
   data: () => ({
     users: [] as User[]
   }),
+  methods: {
+    getIncludedUser() {
+      return this.users.filter(user => user.include);
+    }
+  },
   computed: {
     loadedUsers: (): User[] => require("@/data/users.json").users as User[]
   }
