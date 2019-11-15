@@ -28,10 +28,11 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { User } from "@/model";
+import { User } from "@/models";
 import eventBus from "@/eventBus";
 
 export default Vue.extend({
+  name: "GroupModal",
   props: {
     users: {
       type: Array as () => User[],
@@ -39,15 +40,15 @@ export default Vue.extend({
       default: () => []
     }
   },
+  inject: ["shuffleService"],
   data: () => ({
     dialog: false
   }),
   methods: {
     onDraw(e: any) {
-      const result: Map<string, User[]> = new Map<string, User[]>();
-      result.set("first", this.users.slice(0, 7));
-      result.set("second", this.users.slice(7, 14));
-      result.set("third", this.users.slice(14, 20));
+      // injected elements can't be inferred due to "TypeScript-Vue Extends" API.
+      // More info: https://stackoverflow.com/questions/55183220/vue-js-typescript-component-cannot-find-inject-instance-properties
+      const result = (this as any).shuffleService.shuffle(this.users);
       eventBus.$emit("onDrawEvent", result);
       this.dialog = false;
     },

@@ -49,7 +49,7 @@
 <script lang="ts">
 import Vue from "vue";
 import eventBus from "@/eventBus";
-import { User } from "@/model";
+import { User } from "@/models";
 export default Vue.extend({
   name: "Result",
   mounted: function() {
@@ -59,7 +59,7 @@ export default Vue.extend({
     eventBus.$off("onDrawEvent");
   },
   methods: {
-    setResult(result: Map<string, User[]>) {
+    setResult(result: Map<number, User[]>) {
       this.result = result;
     },
     getTimeTurn(turnNumber: number) {
@@ -70,8 +70,10 @@ export default Vue.extend({
           return "10:30";
         case 2:
           return "10:45";
+        case 3:
+          return "11:00";
         default:
-          return "";
+          return "N/A";
       }
     },
     copy() {
@@ -105,7 +107,7 @@ export default Vue.extend({
     }
   },
   data: () => ({
-    result: new Map<string, User[]>()
+    result: new Map<number, User[]>()
   })
 });
 </script>

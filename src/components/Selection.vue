@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-card>
-      <v-card-title>
+      <v-card-title style="word-break: break-word">
         Selecciona los participantes al sorteo de los turnos de desayuno
       </v-card-title>
       <v-card-text>
         <v-list dense>
           <v-list-item v-for="user in users" :key="user.alias">
-            <v-list-item-content>
+            <v-list-item-content class="pl-5">
               <v-switch
                 hide-details
                 color="success"
@@ -32,7 +32,9 @@
         </v-list>
       </v-card-text>
       <v-card-actions>
-        <GroupModal :users="users" />
+        <ShuffleProvider>
+          <GroupModal :users="users" />
+        </ShuffleProvider>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -40,11 +42,13 @@
 <script lang="ts">
 import Vue from "vue";
 import GroupModal from "@/components/GroupModal.vue";
-import { User } from "@/model";
+import ShuffleProvider from "@/providers/ShuffleProvider.vue";
+import { User } from "@/models";
 
 export default Vue.extend({
   name: "Selection",
   components: {
+    ShuffleProvider,
     GroupModal
   },
   mounted: function() {
