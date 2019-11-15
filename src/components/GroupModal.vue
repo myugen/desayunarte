@@ -37,7 +37,8 @@ export default Vue.extend({
     users: {
       type: Array as () => User[],
       required: true,
-      default: () => []
+      default: () => [],
+      validator: users => users.every((user: User) => user.include)
     }
   },
   inject: ["shuffleService"],

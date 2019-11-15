@@ -16,24 +16,26 @@
               ></v-switch>
             </v-list-item-content>
             <v-list-item-action>
-              <v-btn-toggle v-model="user.default">
-                <v-btn text x-small value="first">
-                  Primer turno
-                </v-btn>
-                <v-btn text x-small value="last">
-                  Segundo turno
-                </v-btn>
-                <v-btn text x-small value="undefined">
+              <div>
+                <v-btn-toggle v-model="user.default">
+                  <v-btn text x-small value="first">
+                    Primer turno
+                  </v-btn>
+                  <v-btn text x-small value="last">
+                    Segundo turno
+                  </v-btn>
+                </v-btn-toggle>
+                <v-btn text x-small @click="user.default = undefined">
                   <v-icon x-small>fas fa-times</v-icon>
                 </v-btn>
-              </v-btn-toggle>
+              </div>
             </v-list-item-action>
           </v-list-item>
         </v-list>
       </v-card-text>
       <v-card-actions>
         <ShuffleProvider>
-          <GroupModal :users="users" />
+          <GroupModal :users="getIncludedUser()" />
         </ShuffleProvider>
       </v-card-actions>
     </v-card>
@@ -57,6 +59,11 @@ export default Vue.extend({
   data: () => ({
     users: [] as User[]
   }),
+  methods: {
+    getIncludedUser() {
+      return this.users.filter(user => user.include);
+    }
+  },
   computed: {
     loadedUsers: (): User[] => require("@/data/users.json").users as User[]
   }
