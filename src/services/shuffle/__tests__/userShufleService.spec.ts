@@ -10,10 +10,7 @@ describe("UserShuffleService", () => {
 
   it("given an array of users should return shuffled users group by turns", () => {
     const service = new UserShuffleService();
-
     const result = service.shuffle(users.slice(0, 11));
-    console.log(result);
-
     expect(Array.from(result.keys()).length).toEqual(2);
   });
 });
