@@ -47,3 +47,6 @@ export default Vue.extend({
   })
 });
 </script>
+<style lang="sass">
+@import "./assets/style/variables"
+</style>

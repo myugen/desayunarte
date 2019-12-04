@@ -22,7 +22,9 @@
               <v-divider></v-divider>
               <v-list dense>
                 <v-list-item v-for="user in turn" :key="user.alias">
-                  <v-list-item-content>{{ user.name }}</v-list-item-content>
+                  <v-list-item-content>{{
+                    user.name.concat(user.default ? "*" : "")
+                  }}</v-list-item-content>
                   <v-list-item-content class="align-end">
                     <v-chip>
                       <v-avatar left>
@@ -95,11 +97,12 @@ export default Vue.extend({
             `Turno ${index + 1}: [${turn
               .map(user =>
                 index != 0
-                  ? user.name
+                  ? user.name.concat(user.default ? "*" : "")
                   : user.name
                       .concat(" ( @")
                       .concat(user.alias)
                       .concat(" )")
+                      .concat(user.default ? "*" : "")
               )
               .join(", ")}]`
         )

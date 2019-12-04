@@ -25,7 +25,7 @@
                     Segundo turno
                   </v-btn>
                 </v-btn-toggle>
-                <v-btn text x-small @click="user.default = undefined">
+                <v-btn text x-small @click="user.default = null">
                   <v-icon x-small>fas fa-times</v-icon>
                 </v-btn>
               </div>

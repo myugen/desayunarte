@@ -19,19 +19,60 @@ export class UserShuffleService implements ShuffleService<User> {
 
   private groupUsersByTurn(users: User[]): Map<number, User[]> {
     const turns = Math.floor(users.length / 6) + 1;
-    const offset = Math.floor(users.length / turns);
-
-    const usersPerTurn = new Map<number, User[]>();
+    const maxUsersOnTurn = Math.floor(users.length / turns);
+    const usersOnDefaultTurn = this.getUsersWithDefaultTurns(users, turns);
+    const usersToPairInTurns = users.filter(user => !user.default);
+    const usersPerTurn = this.initUsersPerTurn(usersOnDefaultTurn, turns);
     for (let turn = 0; turn < turns; turn++) {
-      const usersOnTurn = users.splice(0, offset);
-      usersPerTurn.set(turn, usersOnTurn);
+      const freeSlotOnTurn = maxUsersOnTurn - usersPerTurn.get(turn)!.length;
+      const usersPairedInTurn = usersToPairInTurns.splice(
+        0,
+        freeSlotOnTurn < 0 ? 0 : freeSlotOnTurn
+      );
+      const dummy = usersPerTurn.get(turn)!.concat(usersPairedInTurn);
+      usersPerTurn.set(turn, dummy);
     }
 
-    users.forEach((user, index) => {
+    usersToPairInTurns.forEach((user, index) => {
       const usersCurrentTurn = usersPerTurn.get(index % turns)!;
       usersCurrentTurn.push(user);
     });
 
     return usersPerTurn;
   }
+
+  private getUsersWithDefaultTurns(
+    users: User[],
+    turns: number
+  ): UsersWithDefaultTurn {
+    return ["first", "last"].reduce(
+      (previous, current) => ({
+        ...previous,
+        ...{
+          [current === "first" ? 0 : turns - 1]: users.filter(
+            user => user.default === current
+          )
+        }
+      }),
+      {}
+    );
+  }
+  private initUsersPerTurn(
+    usersOnDefaultTurn: UsersWithDefaultTurn,
+    turns: number
+  ): Map<number, User[]> {
+    const usersInDefaultTurns = new Map<number, User[]>();
+    for (let turn = 0; turn < turns; turn++) {
+      usersInDefaultTurns.set(
+        turn,
+        usersOnDefaultTurn[turn] ? usersOnDefaultTurn[turn] : []
+      );
+    }
+
+    return usersInDefaultTurns;
+  }
+}
+
+interface UsersWithDefaultTurn {
+  [turn: number]: User[];
 }
