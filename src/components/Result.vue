@@ -86,7 +86,6 @@ export default Vue.extend({
       );
     },
     onCopySuccess: (e: any) => {
-      console.info("Copied!", e.text);
       bulmaToast.toast({
         message: "Copia de los turnos realizada",
         type: "is-success",
@@ -99,7 +98,19 @@ export default Vue.extend({
         animate: { in: "slideInUp", out: "slideOutDown" }
       });
     },
-    onCopyError: (e: any) => {},
+    onCopyError: (e: any) => {
+      bulmaToast.toast({
+        message: "Ups, ha habido un error en la copia de los turnos",
+        type: "is-danger",
+        duration: 3000,
+        position: "bottom-center",
+        opacity: 0.8,
+        pauseOnHover: true,
+        closeOnClick: true,
+        dismissible: true,
+        animate: { in: "slideInUp", out: "slideOutDown" }
+      });
+    },
     getTextToCopy() {
       const values = Array.from(this.result.values());
 
