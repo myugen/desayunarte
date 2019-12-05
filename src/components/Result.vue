@@ -52,6 +52,7 @@
 import Vue from "vue";
 import eventBus from "@/eventBus";
 import { User } from "@/models";
+import * as bulmaToast from "bulma-toast";
 export default Vue.extend({
   name: "Result",
   mounted: function() {
@@ -85,7 +86,18 @@ export default Vue.extend({
       );
     },
     onCopySuccess: (e: any) => {
-      console.log("Copied!", e.text);
+      console.info("Copied!", e.text);
+      bulmaToast.toast({
+        message: "Copia de los turnos realizada",
+        type: "is-success",
+        duration: 3000,
+        position: "bottom-center",
+        opacity: 0.8,
+        pauseOnHover: true,
+        closeOnClick: true,
+        dismissible: true,
+        animate: { in: "slideInUp", out: "slideOutDown" }
+      });
     },
     onCopyError: (e: any) => {},
     getTextToCopy() {
