@@ -9,6 +9,7 @@
       <v-img
         :src="require('@/assets/logo.png')"
         class="my-3"
+        aspect-ratio="1"
         contain
         position="right"
         height="50"
