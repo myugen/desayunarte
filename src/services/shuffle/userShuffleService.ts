@@ -38,6 +38,8 @@ export class UserShuffleService implements ShuffleService<User> {
       usersCurrentTurn.push(user);
     });
 
+    usersPerTurn.forEach(users => users.reverse());
+
     return usersPerTurn;
   }
 
