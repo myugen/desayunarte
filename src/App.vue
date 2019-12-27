@@ -1,32 +1,43 @@
 <template>
-  <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>DESAYUNARTE</span>
-        <span class="font-weight-light">{{ version }}</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-img
-        :src="require('@/assets/logo.png')"
-        class="my-3"
-        aspect-ratio="1"
-        contain
-        position="right"
-        height="50"
-      ></v-img>
-    </v-app-bar>
+  <div id="app">
+    <nav
+      class="navbar is-fixed-top is-light is-boxed"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://arte.dev">
+          <el-image
+            :src="require('@/assets/logo.png')"
+            fit="contain"
+            lazy
+            style="width: auto !important;"
+          ></el-image>
+        </a>
+      </div>
 
-    <v-content>
-      <v-row>
-        <v-col cols="12" md="6" lg="6" xl="6">
-          <Selection />
-        </v-col>
-        <v-col cols="12" md="6" lg="6" xl="6">
-          <Result />
-        </v-col>
-      </v-row>
-    </v-content>
-  </v-app>
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <div class="navbar-item has-text-black">
+            <span>DESAYUNARTE</span>
+            <span>{{ version }}</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <Selection />
+          </div>
+          <div class="column">
+            <Result />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -48,6 +59,4 @@ export default Vue.extend({
   })
 });
 </script>
-<style lang="sass">
-@import "./assets/style/variables"
-</style>
+<style lang="sass"></style>
