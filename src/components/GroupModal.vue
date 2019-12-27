@@ -64,6 +64,7 @@ export default Vue.extend({
       const result = (this as any).shuffleService.shuffle(this.users);
       eventBus.$emit("onDrawEvent", result);
       this.dialog = false;
+      this.$scrollTo("nav");
     },
     onCancel(e: any) {
       this.dialog = false;

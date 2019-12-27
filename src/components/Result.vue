@@ -11,13 +11,17 @@
           :key="index"
         >
           <div class="panel-heading">
-            Turno {{ index + 1 }} ({{ getTimeTurn(index) }})
+            Turno {{ index + 1 }} - {{ getTimeTurn(index) }}
+            <i class="el-icon-time"></i>
           </div>
           <div class="panel-block" v-for="user in turn" :key="user.alias">
             <div style="width: 100%" class="level">
               <div class="level-left">
                 <span class="level-item">
-                  {{ user.name.concat(user.default ? "*" : "") }}
+                  {{ user.name }}
+                  <span v-if="user.default">
+                    &nbsp;<i class="el-icon-lock"></i>
+                  </span>
                 </span>
               </div>
               <div class="level-right">
