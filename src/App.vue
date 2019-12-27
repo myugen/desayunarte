@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav
-      class="navbar is-fixed-top is-light is-boxed"
+      class="navbar is-fixed-top is-light is-shadowed"
       role="navigation"
       aria-label="main navigation"
     >

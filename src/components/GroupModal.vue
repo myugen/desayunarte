@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="is-padding-lefted">
     <el-button
       type="primary"
       @click="dialog = true"
