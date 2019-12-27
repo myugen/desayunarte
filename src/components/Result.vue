@@ -1,58 +1,58 @@
 <template>
-  <v-container>
-    <v-card v-show="!!result.size">
-      <v-card-title>Resultados</v-card-title>
-      <v-card-text>
-        <v-row>
-          <v-col
-            v-for="(turn, index) in Array.from(this.result.values())"
-            :key="index"
-            cols="12"
-            sm="12"
-            md="12"
-            lg="12"
-            xl="4"
-          >
-            <v-card>
-              <v-card-title
-                ><h4>
-                  Turno {{ index + 1 }} ({{ getTimeTurn(index) }})
-                </h4></v-card-title
-              >
-              <v-divider></v-divider>
-              <v-list dense>
-                <v-list-item v-for="user in turn" :key="user.alias">
-                  <v-list-item-content>{{
-                    user.name.concat(user.default ? "*" : "")
-                  }}</v-list-item-content>
-                  <v-list-item-content class="align-end">
-                    <v-chip>
-                      <v-avatar left>
-                        <v-icon>fas fa-at</v-icon>
-                      </v-avatar>
-                      {{ user.alias }}
-                    </v-chip>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text color="success" @click="copy">
-          <v-icon small left>far fa-clipboard</v-icon>
+  <div class="card" v-show="!!result.size">
+    <div class="card-content">
+      <p class="title">
+        Resultados
+      </p>
+      <div class="content">
+        <div
+          class="panel"
+          v-for="(turn, index) in Array.from(this.result.values())"
+          :key="index"
+        >
+          <div class="panel-heading">
+            Turno {{ index + 1 }} ({{ getTimeTurn(index) }})
+          </div>
+          <div class="panel-block" v-for="user in turn" :key="user.alias">
+            <div style="width: 100%" class="level">
+              <div class="level-left">
+                <span class="level-item">
+                  {{ user.name.concat(user.default ? "*" : "") }}
+                </span>
+              </div>
+              <div class="level-right">
+                <span class="level-item">
+                  <el-tag>
+                    <el-badge>
+                      <i class="fas fa-at"></i>
+                    </el-badge>
+                    {{ user.alias }}
+                  </el-tag>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-item is-flex-start">
+        <el-button
+          type="success"
+          @click="copy"
+          round
+          icon="el-icon-document-copy"
+        >
           <span>Copiar</span>
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-container>
+        </el-button>
+      </div>
+    </div>
+  </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
 import eventBus from "@/eventBus";
 import { User } from "@/models";
-import * as bulmaToast from "bulma-toast";
 export default Vue.extend({
   name: "Result",
   mounted: function() {
@@ -85,30 +85,18 @@ export default Vue.extend({
         this.onCopyError
       );
     },
-    onCopySuccess: (e: any) => {
-      bulmaToast.toast({
-        message: "Copia de los turnos realizada",
-        type: "is-success",
-        duration: 3000,
-        position: "bottom-center",
-        opacity: 0.8,
-        pauseOnHover: true,
-        closeOnClick: true,
-        dismissible: true,
-        animate: { in: "slideInUp", out: "slideOutDown" }
+    onCopySuccess(e: any) {
+      this.$message({
+        message: "Copia de los turnos realizada.",
+        type: "success",
+        showClose: true
       });
     },
-    onCopyError: (e: any) => {
-      bulmaToast.toast({
-        message: "Ups, ha habido un error en la copia de los turnos",
-        type: "is-danger",
-        duration: 3000,
-        position: "bottom-center",
-        opacity: 0.8,
-        pauseOnHover: true,
-        closeOnClick: true,
-        dismissible: true,
-        animate: { in: "slideInUp", out: "slideOutDown" }
+    onCopyError(e: any) {
+      this.$message({
+        message: "Ups, ha habido un error en la copia de los turnos.",
+        type: "error",
+        showClose: true
       });
     },
     getTextToCopy() {

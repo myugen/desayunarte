@@ -1,45 +1,41 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-card-title style="word-break: break-word">
+  <div class="card">
+    <div class="card-content">
+      <p class="title">
         Selecciona los participantes al sorteo de los turnos de desayuno
-      </v-card-title>
-      <v-card-text>
-        <v-list dense>
-          <v-list-item v-for="user in users" :key="user.alias">
-            <v-list-item-content class="pl-5">
-              <v-switch
-                hide-details
-                color="success"
-                v-model="user.include"
-                :label="user.name"
-              ></v-switch>
-            </v-list-item-content>
-            <v-list-item-action>
-              <div>
-                <v-btn-toggle v-model="user.default">
-                  <v-btn text x-small value="first">
-                    Primer turno
-                  </v-btn>
-                  <v-btn text x-small value="last">
-                    Segundo turno
-                  </v-btn>
-                </v-btn-toggle>
-                <v-btn text x-small @click="user.default = null">
-                  <v-icon x-small>fas fa-times</v-icon>
-                </v-btn>
-              </div>
-            </v-list-item-action>
-          </v-list-item>
-        </v-list>
-      </v-card-text>
-      <v-card-actions>
+      </p>
+      <div class="content">
+        <div class="columns" v-for="user in users" :key="user.alias">
+          <div class="column">
+            <el-switch v-model="user.include" :active-text="user.name">
+            </el-switch>
+          </div>
+          <div class="column">
+            <el-select
+              v-model="user.default"
+              clearable
+              placeholder="Seleccione una preferencia"
+            >
+              <el-option
+                v-for="preference in preferences"
+                :key="preference.value"
+                :label="preference.label"
+                :value="preference.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-item is-flex-start">
         <ShuffleProvider>
           <GroupModal :users="getIncludedUser()" />
         </ShuffleProvider>
-      </v-card-actions>
-    </v-card>
-  </v-container>
+      </div>
+    </div>
+  </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -57,7 +53,17 @@ export default Vue.extend({
     this.users = this.loadedUsers;
   },
   data: () => ({
-    users: [] as User[]
+    users: [] as User[],
+    preferences: [
+      {
+        value: "first",
+        label: "Primer turno"
+      },
+      {
+        value: "last",
+        label: "Último turno"
+      }
+    ]
   }),
   methods: {
     getIncludedUser() {
