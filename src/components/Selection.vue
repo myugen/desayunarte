@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="card-footer">
+    <div class="card-footer is-borderless">
       <div class="card-footer-item is-flex-start">
         <ShuffleProvider>
           <GroupModal :users="getIncludedUser()" />
