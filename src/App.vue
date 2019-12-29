@@ -29,7 +29,9 @@
       <div class="container">
         <div class="columns">
           <div class="column">
-            <Selection />
+            <ShuffleProvider>
+              <Selection />
+            </ShuffleProvider>
           </div>
           <div class="column">
             <Result />
@@ -42,12 +44,14 @@
 
 <script lang="ts">
 import Vue from "vue";
+import ShuffleProvider from "./providers/ShuffleProvider.vue";
 import Selection from "./components/Selection.vue";
 import Result from "./components/Result.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
+    ShuffleProvider,
     Selection,
     Result
   },

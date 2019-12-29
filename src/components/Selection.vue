@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" id="selection">
     <div class="card-content">
       <p class="title">
         Selecciona los participantes al sorteo de los turnos de desayuno
@@ -30,25 +30,28 @@
     </div>
     <div class="card-footer is-borderless">
       <div class="card-footer-item is-flex-start">
-        <ShuffleProvider>
-          <GroupModal :users="getIncludedUser()" />
-        </ShuffleProvider>
+        <div class="is-padding-lefted">
+          <el-button
+            type="info"
+            @click="onDraw"
+            round
+            icon="el-icon-coffee-cup"
+          >
+            <span>Crear grupos</span>
+          </el-button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import GroupModal from "@/components/GroupModal.vue";
-import ShuffleProvider from "@/providers/ShuffleProvider.vue";
+import eventBus from "@/eventBus";
 import { User } from "@/models";
 
 export default Vue.extend({
   name: "Selection",
-  components: {
-    ShuffleProvider,
-    GroupModal
-  },
+  inject: ["shuffleService"],
   mounted: function() {
     this.users = this.loadedUsers;
   },
@@ -66,6 +69,15 @@ export default Vue.extend({
     ]
   }),
   methods: {
+    onDraw(e: any) {
+      // injected elements can't be inferred due to "TypeScript-Vue Extends" API.
+      // More info: https://stackoverflow.com/questions/55183220/vue-js-typescript-component-cannot-find-inject-instance-properties
+      const result = (this as any).shuffleService.shuffle(
+        this.getIncludedUser()
+      );
+      eventBus.$emit("onDrawEvent", result);
+      this.$scrollTo("#result");
+    },
     getIncludedUser() {
       return this.users.filter(user => user.include);
     }

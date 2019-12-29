@@ -1,5 +1,5 @@
 <template>
-  <div class="card" v-show="!!result.size">
+  <div class="card" id="result" v-show="!!result.size">
     <div class="card-content">
       <p class="title">
         Resultados
@@ -44,7 +44,7 @@
         <div class="is-padding-lefted">
           <el-button
             class="is-padding-lefted"
-            type="success"
+            type="info"
             @click="copy"
             round
             icon="el-icon-document-copy"
