@@ -115,12 +115,12 @@ export default Vue.extend({
             `Turno ${index + 1}: [${turn
               .map(user =>
                 index != 0
-                  ? user.name.concat(user.default ? "*" : "")
+                  ? user.name.concat(user.default ? "🔒" : "")
                   : user.name
                       .concat(" ( @")
                       .concat(user.alias)
                       .concat(" )")
-                      .concat(user.default ? "*" : "")
+                      .concat(user.default ? "🔒" : "")
               )
               .join(", ")}]`
         )
